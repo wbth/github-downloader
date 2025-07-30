@@ -5,14 +5,12 @@ GITHUB_API = "https://api.github.com/repos/PacktPublishing/CompTIA-A-Certificati
 OUTPUT_DIR = "slide_handouts_1101"
 
 def list_files():
-    """Dapatkan daftar file di direktori GitHub via GitHub Contents API."""
     resp = requests.get(GITHUB_API)
     resp.raise_for_status()
     entries = resp.json()
     return [e for e in entries if e.get("type") == "file"]
 
 def download_file(file_entry):
-    """Download file PDF dari download_url di entry."""
     url = file_entry['download_url']
     name = file_entry['name']
     print(f"→ Mengunduh: {name}")
